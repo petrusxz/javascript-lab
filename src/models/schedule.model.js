@@ -1,4 +1,4 @@
-class Schedule {
+export default class Schedule {
 
     /**
      * @param {Schedule} schedule
@@ -25,5 +25,3 @@ class Schedule {
         });
     }
 }
-
-module.exports = Schedule;
