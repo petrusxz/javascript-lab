@@ -1,5 +1,5 @@
-import Home from './routes/home.js';
-import Scheduling from './routes/scheduling.js';
+import Home from './components/home.js';
+import Scheduling from './components/scheduling.js';
 import Component from './models/component.model.js';
 
 const routes = [
