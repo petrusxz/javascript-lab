@@ -44,7 +44,7 @@ export default class App {
             id = route.id;
         }
 
-        this.appContent.innerHTML = new component().render();
+        new component().render();
         document.location.assign(`/#/${id}`);
     }
 }

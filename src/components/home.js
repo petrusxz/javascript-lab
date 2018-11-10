@@ -1,39 +1,45 @@
 import Component from './../models/component.model.js';
 import Storage from '../services/storage.service.js';
+import Schedule from '../models/schedule.model.js';
 
 export default class Home extends Component {
 
     constructor() {
         super();
     }
-    
+
     /**
      * @returns {string}
      */
     mountScheduleList() {
-        const scheduleList = Storage.getAll('scheduling');
-        
+        const scheduleList = Storage.getAll(Schedule);
+
         if (!scheduleList.length) {
             return `
                 <label>Empty list.</label>
             `;
         }
 
-        let elementList = null;
+        const container = document.createElement('div');
+        const elementList = document.createElement('ul');
         scheduleList.forEach(element => {
-            elementList += `<li>${element}</li>`;
+            elementList.innerHTML += `<li>${element.technology} | ${element.date} | ${element.hour}</li>`;
         });
 
-        return elementList;
+        container.appendChild(elementList);
+
+        return container.innerHTML;
     }
 
     render() {
-        return `
+        const templateHTML = `
             <p>Recent scheduling</p>
 
-            <ul>
+            <div>
                 ${this.mountScheduleList()}
-            </ul>
+            </div>
         `;
-    }    
+
+        super.render(templateHTML);
+    }
 }

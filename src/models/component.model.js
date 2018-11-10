@@ -1,3 +1,10 @@
 export default class Component {
-    render() {}
+
+    /**
+     * @param {string} content 
+     */
+    render(content) { 
+        const appContent = document.getElementById('app-content');
+        appContent.innerHTML = content;
+    }
 }

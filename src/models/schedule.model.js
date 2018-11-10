@@ -5,7 +5,7 @@ export default class Schedule {
      */
     constructor(values = {}) {
         /**
-         * @type {Date}
+         * @type {string}
          */
         this.date = null;
 
@@ -21,7 +21,7 @@ export default class Schedule {
 
         Object.keys(this).forEach(key => {
             if (values.hasOwnProperty(key))
-                this[key] = values[key];
+                this[key] = values[key].value;
         });
     }
 }
