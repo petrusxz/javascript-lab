@@ -4,7 +4,7 @@
   "description": "Javascript Lab",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:@babel/register --require @babel/polyfill \"tests/**/*.test.js\""
+    "test": "mocha --require @babel/register --require @babel/polyfill \"tests/**/*.test.js\""
   },
   "author": "Petrus Cyrino",
   "license": "ISC",
@@ -14,6 +14,7 @@
     "@babel/preset-env": "^7.1.5",
     "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
+    "jsdom": "^13.0.0",
     "mocha": "^5.2.0"
   }
 }

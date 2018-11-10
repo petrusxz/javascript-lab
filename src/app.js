@@ -1,45 +1,50 @@
 import Home from './components/home.js';
 import Scheduling from './components/scheduling.js';
-import Component from './models/component.model.js';
 
 const routes = [
-    { name: 'Home', component: Home },
-    { name: 'Scheduling', component: Scheduling }
+    { id: 'home', name: 'Home', component: Home },
+    { id: 'scheduling', name: 'Scheduling', component: Scheduling }
 ];
 
 export default class App {
-
+    
     constructor() {
         this.appContent = document.getElementById('app-content');
+        this.appNavbar = document.getElementById('app-navbar');
+
         this.setRoot();
         this.setAppNavbar();
     }
 
     setAppNavbar() {
-        const appNavbar = document.getElementById('app-navbar');
-        const createButtonElment = (name) => {
+        const createButtonElement = ({ name, id }) => {
             return `
-                <button type="button" id="${name.toLowerCase()}">
+                <button type="button" id="${id}">
                     ${name}
                 </button>
             `;
         };
 
         routes.forEach(element => {
-            const { name, component } = element;
-            appNavbar.innerHTML += createButtonElment(name);
-
-            setTimeout(() => {
-                document.getElementById(name.toLowerCase())
-                    .addEventListener('click', this.setRoot.bind(this, component));
-            }, 0);
+            this.appNavbar.innerHTML += createButtonElement(element);
         });
+
+        this.appNavbar.addEventListener('click', this.setRoot.bind(this));
     }
 
     /**
-     * @param {Component} component 
+     * @param {MouseEvent} event 
      */
-    setRoot(component = Home) {
+    setRoot(event = null) {
+        let { component, id } = routes[0];
+
+        if (event) {
+            const route = routes.find(element => element.id === event.srcElement.id);
+            component = route.component;
+            id = route.id;
+        }
+
         this.appContent.innerHTML = new component().render();
+        document.location.assign(`/#/${id}`);
     }
 }
